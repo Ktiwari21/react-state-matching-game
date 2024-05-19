@@ -2,11 +2,6 @@ name: "Bump Version"
 
 on:
     workflow_dispatch:
-        inputs:
-            branchName:
-                description: Enter the branch name or TAG
-                required: true
-                default: master
 
 jobs:
   bump-version:
