@@ -1,0 +1,32 @@
+name: "Bump Version"
+
+on:
+    workflow_dispatch:
+        inputs:
+            branchName:
+                description: Enter the branch name or TAG
+                required: true
+                default: master
+
+jobs:
+  bump-version:
+    name: "Bump Version on master"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2"
+        with:
+          ref: ${{ github.ref }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 12
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          target-branch: 'solution'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
